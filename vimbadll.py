@@ -2,7 +2,7 @@
 import vimbastructure as structs
 from vimbaexception import VimbaException
 from ctypes import *
-from ctypes.util import find_msvcrt
+# from ctypes.util import find_msvcrt
 import os
 
 class VimbaDLL(object):
@@ -85,10 +85,14 @@ class VimbaDLL(object):
 	# -- VmbRegistersWrite()
 	
 	# Vimba C API DLL
-	vimbaC_path = r'C:\Program Files\Allied Vision Technologies\AVTVimba_1.2\VimbaC\Bin\Win32\VimbaC.dll'
-	with open(vimbaC_path) as thefile:
-		pass
-	_vimbaDLL = windll.LoadLibrary(vimbaC_path)
+	# vimbaC_path = r'C:\Program Files\Allied Vision Technologies\AVTVimba_1.2\VimbaC\Bin\Win32\VimbaC.dll'
+	# with open(vimbaC_path) as thefile:
+	# 	pass
+	# _vimbaDLL = windll.LoadLibrary(vimbaC_path)
+
+	vimbaC_path = r'/home/xamox/Code/Vimba_1_2/VimbaC/DynamicLib/x86_64bit/libVimbaC.so'
+	# import ipdb;ipdb.set_trace()
+	_vimbaDLL = CDLL(vimbaC_path)
 	
 	# version query
 	versionQuery = _vimbaDLL.VmbVersionQuery
@@ -333,7 +337,9 @@ class VimbaC_MemoryBlock(object):
 	"""
 	
 	# C runtime DLL
-	_crtDLL = cdll.LoadLibrary(find_msvcrt())
+	# _crtDLL = cdll.LoadLibrary(find_msvcrt())
+	# import ipdb;ipdb.set_trace()
+	_crtDLL = CDLL('/home/xamox/Code/Vimba_1_2/VimbaC/DynamicLib/x86_64bit/libVimbaC.so')
 	
 	@property
 	def block(self):
